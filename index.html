@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Shakespear Monkey Example</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="normalize.css">
+        <link rel="stylesheet" href="skeleton.css">
+        <script src="dna.js"></script>
+        <script src="population.js"></script>
+        <script src="app.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="seven columns" style="display:block; margin: auto; margin-top: 5em">
+                    <div class="row">
+                        <label for="">Target Quote:</label>
+                        <input id="target_quote" type="text" class="" value="I'm Batman">
+                        <button id="btn" class="button">Go</button> 
+                    </div>
+                    <h3 id="generations"></h3>
+                    <h4>Best result so far:</h4>
+                    <h1 id="thisword">The thing you are looking for</h1>
+                    <h4>Best fitness score:<h4>
+                    <h3 id="bestfit">not the worst</h3>
+                </div>
+                <div class="five columns">
+                    <div style="font-size: 2rem" id="all_population"></div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
