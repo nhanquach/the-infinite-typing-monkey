@@ -3,9 +3,10 @@ window.onload = function () {
     var h1 = document.getElementById('thisword');
     var h3 = document.getElementById('bestfit');
     var genDisplay = document.getElementById('generations');
-    var button = document.getElementById('btn');    
+    var button = document.getElementById('btn');
+    var title = document.getElementById('title');
     
-    var pop = new Population(500, quote);
+    var pop = new Population(1000, quote);
     var gen = 0;
 
     executeGA(); 
@@ -18,7 +19,7 @@ window.onload = function () {
     function executeGA() {
         quote = document.getElementById('target_quote').value;
 
-        pop = new Population(500, quote);
+        pop = new Population(1000, quote);
         gen = 0;
 
         pop.init();
@@ -27,6 +28,7 @@ window.onload = function () {
         var update;
         update = setInterval(function () {
             genDisplay.innerHTML = "Generation #" + gen;
+            title.innerHTML = "#" + gen + " - " + h1.innerHTML;
             gen++;
             if (isEnd != true) {
                 //If the result is not the quote we need, Reproduce the population
@@ -37,7 +39,7 @@ window.onload = function () {
                 //Yay!!!
                 stopTheLoop();
             };
-        }, 10);
+        }, 0);
 
         function stopTheLoop() {
             //alert();

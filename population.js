@@ -25,7 +25,7 @@ function Population(popmax, quote) {
             //add the DNA to the population array
             population[i] = dna;
         }
-        //Make the population the initial population to start.
+        //the initial population to begin - gen0.
         return this.population = population;
     };
 
@@ -36,29 +36,30 @@ function Population(popmax, quote) {
         div.innerHTML = "";
         var newPopulation = []; //Create a new population array.
         var matingPool = this.matingPool(); //Make a mating Pool
-        for (var i = 0; i < this.population.length; i++){
+        for (var i = 0; i < this.population.length;){
             //Pick 2 DNA as parent
             var a = this.pickOne(matingPool);
             var b = this.pickOne(matingPool);
             //Crossover them to create a new DNA - child
             var child = a.crossOver(b);
-            //Mutate that child into m_child
-            var m_child = child.mutation(child.genes, 0.01);
-            //Add that m_child to the new population array
-            newPopulation[i] = m_child;
-            
+            for (var j = 0; j < 2; j++){
+                //Mutate that child into m_child
+                var m_child = child[j].mutation(child[j].genes, 0.01);
+                //Add that m_child to the new population array
+                newPopulation[i] = m_child;
+                i++;
+            }
             //Show it out the view
             var newcontent = document.createElement('div');
             div.appendChild(newcontent, newcontent.innerHTML= m_child.genes.join(""));
         };
         //Replace the all population with the new population.
         this.population = newPopulation;
+        
         //Check the new population for new result.
         return this.end();
     };
     
-    
-
     this.end = function () {
         //Check if the quote is in the population or not.
         //If yes => true | no => false
@@ -82,6 +83,9 @@ function Population(popmax, quote) {
         return false;
     };
 
+    /**
+     * This is MatingPool, no, it has nothing to do with Deadpool.
+     */
     this.matingPool = function () {
         matingPool = [];
         for (var i = 0; i < this.population.length; i++) {
@@ -99,13 +103,14 @@ function Population(popmax, quote) {
         var r = Math.floor(Math.random() * (matingPool.length - 0) + 0);
         return matingPool[r];
 
-        //This is just an another approach in Pick a random DNA.
-        // var randomN = Math.floor(Math.random() * (this.population.length - 1) + 1);
-        // var randomDNA = this.population[randomN];
-        
-        // if (AcceptOrReject(randomDNA.fitnessScore)) {
-        //     return randomDNA;
-        // }
+        /** This is just an another approach in Pick a random DNA.
+         * 
+         * var randomN = Math.floor(Math.random() * (this.population.length - 1) + 1);
+         * var randomDNA = this.population[randomN];
+         * if (AcceptOrReject(randomDNA.fitnessScore)) {
+         *    return randomDNA;
+         * }
+         */
     }
 
     // function AcceptOrReject(percent) {
@@ -114,10 +119,12 @@ function Population(popmax, quote) {
     // }
 
     function newChar() {
-        //Math.random() * (max - min) + min;
+        /**
+         * Math.random() * (max - min) + min;
+         * ASCII 32 = "space"
+         * ASCII 126 = "~"
+         */
         var r = Math.random() * (126 - 32) + 32;
         return String.fromCharCode(r);
-    };
-
-    
+    };   
 }

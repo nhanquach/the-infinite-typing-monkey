@@ -7,23 +7,28 @@ function Dna(genes, quote) {
     this.fitnessScore = calcFitness(this.genes, this.quote);
 
     this.crossOver = function (anotherDna) {
-        var childGenes = [];
+        var offsprings = [];
+        var childGenes1 = [];
+        var childGenes2 = [];
         //choose a CrossOver Point
         var crossOverPoint = Math.floor(Math.random() * 
         (this.genes.length) + 0);
         for (var i = 0; i < this.genes.length; i++) {
             if (i < crossOverPoint) {
                 //take all the characters from position 0 to CrossOver Point of the 1st DNA and add it to the new genes array
-                childGenes[i] = this.genes[i];
+                childGenes1[i] = this.genes[i];
+                childGenes2[i] = anotherDna.genes[i];
             } else {
                 //take all the characters from position CrossOver Point to the end of the 2st DNA and add it to the new genes array
-                childGenes[i] = anotherDna.genes[i];
+                childGenes1[i] = anotherDna.genes[i];
+                childGenes2[i] = this.genes[i];
             }
         }
-        //Create a new DNA object form the new genes
-        var dnaChild = new Dna(childGenes, this.quote);
-
-        return dnaChild;
+        //Create a new DNA object from new genes
+        var dnaChild1 = new Dna(childGenes1, this.quote);
+        var dnaChild2 = new Dna(childGenes2, this.quote);
+        offsprings.push(dnaChild1, dnaChild2)
+        return offsprings;
     };
 
     this.mutation = function (genes, rate) {
@@ -42,7 +47,7 @@ function Dna(genes, quote) {
 
 function calcFitness(genes, quote) {
     var score = 0;
-    //Loop through the array of character, if 1 charater is at the right place => score++
+    //Loop through the array of characters, if 1 charater is at the right place => score++
     //fitness = score/length
     for (var i = 0; i < quote.length; i++) {
         if (genes[i] === quote[i]) {
