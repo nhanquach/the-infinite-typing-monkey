@@ -8,6 +8,8 @@ interface ICardAnalyticsProps {
   totalStringCount: number;
 }
 
+const keys = ["time","total-string-count", "accuracy"]
+
 const CardAnalytics: React.FC<ICardAnalyticsProps> = ({
   isExecuting,
   time,
@@ -48,7 +50,7 @@ const CardAnalytics: React.FC<ICardAnalyticsProps> = ({
     <div className="mt-6">
       {trails.map((props, index) => {
         return (
-          <animated.div key={props} style={props}>
+          <animated.div key={keys[index]} style={props}>
             {components[index]}
           </animated.div>
         );
