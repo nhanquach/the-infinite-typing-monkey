@@ -38,9 +38,9 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col lg:flex-row min-h-screen w-full bg-white text-black font-mono">
-      {/* Left Panel: Controls - Pastel Green */}
-      <section className="w-full lg:w-1/2 bg-[#C4E4C5] border-b-4 lg:border-b-0 lg:border-r-4 border-black p-8 lg:p-16 flex flex-col justify-center relative z-10">
+    <main className="flex flex-col lg:flex-row min-h-screen w-full bg-white dark:bg-black text-black dark:text-[#C4E4C5] font-mono transition-colors duration-300">
+      {/* Left Panel: Controls - Pastel Green (Light) / Zinc 900 (Dark) */}
+      <section className="w-full lg:w-1/2 bg-[#C4E4C5] dark:bg-zinc-900 border-b-4 lg:border-b-0 lg:border-r-4 border-black dark:border-[#C4E4C5] p-8 lg:p-16 flex flex-col justify-center relative z-10 transition-colors duration-300">
         <Form
           isExecuting={isExecuting}
           setPopulation={setPopulation}
@@ -51,8 +51,8 @@ export default function Home() {
         />
       </section>
 
-      {/* Right Panel: Results & Visualization - White */}
-      <section className="w-full lg:w-1/2 relative bg-white flex flex-col justify-center p-8 lg:p-16 overflow-hidden">
+      {/* Right Panel: Results & Visualization - White (Light) / Black (Dark) */}
+      <section className="w-full lg:w-1/2 relative bg-white dark:bg-black flex flex-col justify-center p-8 lg:p-16 overflow-hidden transition-colors duration-300">
         <div className="absolute inset-0 z-0">
           <StringBackground quote={quote} population={currentPopulation} />
         </div>
