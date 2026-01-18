@@ -10,15 +10,13 @@ const StringBackground: React.FC<IStringBackgroundProps> = ({
   quote,
 }) => {
   return (
-    <div
-      className={`population min-h-screen min-w-full max-h-screen overflow-auto top-0 left-0 z-0 grid grid-cols-6 bg-[radial-gradient(ellipse_at_left,_var(--tw-gradient-stops))] from-violet-300 to-violet-400`}
-    >
+    <div className="w-full h-full overflow-hidden grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4 content-start opacity-40">
       {population.map((item, index) => {
         if (item === quote) {
           return (
             <div
               key={item + index}
-              className="bg-purple-200 text-xs flex justify-center items-center text-center rounded-md overflow-auto max-h-12 animate-pulse"
+              className="bg-[#C4E4C5] dark:bg-[#C4E4C5] border-2 border-black dark:border-white text-black dark:text-black text-xs md:text-sm font-mono p-2 flex justify-center items-center text-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_white] animate-pulse transition-all duration-300"
             >
               {item}
             </div>
@@ -27,7 +25,7 @@ const StringBackground: React.FC<IStringBackgroundProps> = ({
         return (
           <div
             key={item + index}
-            className="text-center text-xs overflow-auto max-h-12 text-purple-100"
+            className="text-center text-xs md:text-sm font-mono p-2 text-gray-400 dark:text-zinc-500 border border-gray-200 dark:border-zinc-800 truncate transition-colors duration-300"
           >
             {item}
           </div>

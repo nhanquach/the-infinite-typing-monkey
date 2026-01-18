@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        lexend: ["Lexend"],
+        mono: ["var(--font-roboto-mono)"],
       },
     },
   },

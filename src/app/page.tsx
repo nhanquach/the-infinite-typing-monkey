@@ -2,7 +2,8 @@
 import { useState } from "react";
 import execute from "../../utils/executeGA";
 import StringBackground from "./components/StringBackground";
-import Card from "./components/Card";
+import Form from "./components/Form";
+import Result from "./components/Result";
 
 export default function Home() {
   const [quote, setQuote] = useState("To be or not to be.");
@@ -37,22 +38,35 @@ export default function Home() {
   };
 
   return (
-    <div className="font-lexend">
-      <Card
-        quote={quote}
-        setQuote={setQuote}
-        monkeys={monkeys}
-        isExecuting={isExecuting}
-        genNo={genNo}
-        totalStringCount={totalStringCount}
-        time={time}
-        setPopulation={setPopulation}
-        handleExecute={handleExecute}
-        bestFit={bestFit}
-        bestGuess={bestGuess}
-      />
+    <main className="flex flex-col lg:flex-row min-h-screen w-full bg-white dark:bg-black text-black dark:text-[#C4E4C5] font-mono transition-colors duration-300">
+      {/* Left Panel: Controls - Pastel Green (Light) / Zinc 900 (Dark) */}
+      <section className="w-full lg:w-1/2 bg-[#C4E4C5] dark:bg-zinc-900 border-b-4 lg:border-b-0 lg:border-r-4 border-black dark:border-[#C4E4C5] p-8 lg:p-16 flex flex-col justify-center relative z-10 transition-colors duration-300">
+        <Form
+          isExecuting={isExecuting}
+          setPopulation={setPopulation}
+          quote={quote}
+          monkeys={monkeys}
+          handleExecute={handleExecute}
+          setQuote={setQuote}
+        />
+      </section>
 
-      <StringBackground quote={quote} population={currentPopulation} />
-    </div>
+      {/* Right Panel: Results & Visualization - White (Light) / Black (Dark) */}
+      <section className="w-full lg:w-1/2 relative bg-white dark:bg-black flex flex-col justify-center p-8 lg:p-16 overflow-hidden transition-colors duration-300">
+        <div className="absolute inset-0 z-0">
+          <StringBackground quote={quote} population={currentPopulation} />
+        </div>
+        <div className="z-10 relative pointer-events-none">
+          <Result
+            bestGuess={bestGuess}
+            bestFit={bestFit}
+            genNo={genNo}
+            isExecuting={isExecuting}
+            time={time}
+            totalStringCount={totalStringCount}
+          />
+        </div>
+      </section>
+    </main>
   );
 }

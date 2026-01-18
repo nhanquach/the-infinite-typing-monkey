@@ -19,33 +19,39 @@ const Form: React.FC<IFromProps> = ({
 }) => {
   return (
     <form
-      className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left z-10"
+      className="mx-auto max-w-lg w-full text-left z-10"
       onSubmit={(e) => {
         e.preventDefault();
         handleExecute();
       }}
     >
-      <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-        The Infinite Typing Monkey Theorem ⌨️ 🐒
+      <h2 className="text-4xl font-bold tracking-tighter text-black dark:text-[#C4E4C5] mb-6 border-b-4 border-black dark:border-[#C4E4C5] pb-2 inline-block transition-colors duration-300">
+        Infinite Monkey ⌨️ 🐒
       </h2>
-      <p className="mt-6 text-lg leading-8">
+      <p className="mb-8 text-lg font-medium leading-relaxed border-l-4 border-black dark:border-[#C4E4C5] pl-4 text-black dark:text-[#C4E4C5] transition-colors duration-300">
         Given infinite time, a monkey on a typewriter can, theoretically,
         produce any text through random key presses.
       </p>
-      <label className="block text-gray-200 text-sm my-2">Try it</label>
-      <input
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        id="quote"
-        type="text"
-        value={quote}
-        onChange={(e) => {
-          setQuote(e.target.value?.toString());
-        }}
-      />
 
-      <div className="mt-4 ">
-        <label className="block text-gray-200 text-sm mb-2">
-          Number of Monkeys: {monkeys}
+      <div className="mb-6">
+        <label className="block text-black dark:text-[#C4E4C5] font-bold text-lg mb-2 uppercase tracking-wide transition-colors duration-300">
+          Target Text
+        </label>
+        <input
+          className="w-full bg-white dark:bg-black border-4 border-black dark:border-[#C4E4C5] p-4 text-black dark:text-[#C4E4C5] font-mono text-lg focus:outline-none focus:bg-yellow-100 dark:focus:bg-zinc-800 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_#C4E4C5] transition-all focus:translate-x-[2px] focus:translate-y-[2px] focus:shadow-none placeholder-gray-500 dark:placeholder-zinc-600"
+          id="quote"
+          type="text"
+          value={quote}
+          placeholder="Enter text..."
+          onChange={(e) => {
+            setQuote(e.target.value?.toString());
+          }}
+        />
+      </div>
+
+      <div className="mb-8">
+        <label className="block text-black dark:text-[#C4E4C5] font-bold text-lg mb-2 uppercase tracking-wide transition-colors duration-300">
+          Monkey Population: {monkeys}
         </label>
         <input
           id="minmax-range"
@@ -55,16 +61,17 @@ const Form: React.FC<IFromProps> = ({
           step={100}
           value={monkeys}
           onChange={setPopulation}
-          className="w-full h-6 bg-white rounded-2xl appearance-none cursor-pointer"
+          className="w-full h-4 bg-white dark:bg-black border-2 border-black dark:border-[#C4E4C5] appearance-none cursor-pointer accent-black dark:accent-[#C4E4C5] transition-colors duration-300"
         />
       </div>
+
       <button
-        className="mt-2 rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white disabled:bg-gray-300"
+        className="w-full bg-white dark:bg-black text-black dark:text-[#C4E4C5] font-bold text-xl py-4 px-6 border-4 border-black dark:border-[#C4E4C5] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_#C4E4C5] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[4px_4px_0px_0px_#C4E4C5] active:translate-x-[6px] active:translate-y-[6px] active:shadow-none transition-all disabled:bg-gray-300 dark:disabled:bg-zinc-800 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
         type="submit"
         disabled={isExecuting}
         onClick={handleExecute}
       >
-        {isExecuting ? "Typing..." : "Go, Monkeys Go!"}
+        {isExecuting ? "SIMULATING..." : "START SIMULATION"}
       </button>
     </form>
   );
