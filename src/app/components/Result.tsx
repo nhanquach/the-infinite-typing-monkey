@@ -26,10 +26,10 @@ const Result: React.FC<IResultProps> = ({
   const [transitions] = useTransition([bestGuess], () => {
     return {
       ref: transRef,
-      config: { duration: 200 },
-      from: { opacity: 0, transform: "translateX(10%)" },
+      config: { duration: 100 }, // Faster transition for "typewriter" feel
+      from: { opacity: 0, transform: "translateX(5px)" },
       enter: { opacity: 1, transform: "translateX(0%)" },
-      leave: { opacity: 0 },
+      leave: { opacity: 0, position: "absolute" }, // Avoid layout shift if possible, or just standard fade
     };
   });
 
@@ -38,27 +38,35 @@ const Result: React.FC<IResultProps> = ({
   }, [bestGuess, transRef]);
 
   return (
-    <div className="relative mt-16 pt-16 h-80 lg:mt-8 ml-8 mx-auto max-w-md lg:py-32 md:py-12 sm:py-4 z-10">
-      <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-        Generation: #{genNo}
-      </h1>
-      <p className="mt-6 text-lg">
-        Best score in generation: {Math.round(bestFit * 100)}%
-      </p>
-      <p className="text-lg">
-        Best guess in generation:{" "}
-        {transitions((style, item) => (
-          <animated.span style={style} className="text-lg">
-            {item}
-          </animated.span>
-        ))}
-      </p>
+    <div className="w-full max-w-xl mx-auto text-black z-10 relative">
+      <div className="bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] mb-8">
+        <div className="flex justify-between items-center border-b-4 border-black pb-2 mb-4">
+          <h3 className="text-xl font-bold uppercase">Generation #{genNo}</h3>
+          <span className="font-bold bg-black text-white px-2 py-1 text-sm">
+            {Math.round(bestFit * 100)}% FIT
+          </span>
+        </div>
+
+        <div className="min-h-[8rem] flex flex-col justify-center">
+          <p className="text-sm uppercase font-bold text-gray-500 mb-1">Best Guess:</p>
+          <div className="text-3xl md:text-4xl font-mono font-bold break-all leading-tight">
+             {transitions((style, item) => (
+              <animated.span style={style} className="inline-block">
+                {item}
+              </animated.span>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {!isExecuting && totalStringCount > 0 && (
-        <CardAnalytics
-          isExecuting={isExecuting}
-          time={time}
-          totalStringCount={totalStringCount}
-        />
+        <div className="bg-[#C4E4C5] border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+             <CardAnalytics
+              isExecuting={isExecuting}
+              time={time}
+              totalStringCount={totalStringCount}
+            />
+        </div>
       )}
     </div>
   );
