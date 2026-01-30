@@ -4,7 +4,9 @@ interface IFromProps {
   isExecuting: boolean;
   quote: string;
   monkeys: number;
+  userName: string;
   setQuote: (newQuote: string) => void;
+  setUserName: (name: string) => void;
   setPopulation: (e: React.FormEvent<HTMLInputElement>) => void;
   handleExecute: () => void;
 }
@@ -16,6 +18,8 @@ const Form: React.FC<IFromProps> = ({
   setPopulation,
   isExecuting,
   handleExecute,
+  userName,
+  setUserName,
 }) => {
   return (
     <form
@@ -34,7 +38,29 @@ const Form: React.FC<IFromProps> = ({
       </p>
 
       <div className="mb-6">
-        <label className="block text-black dark:text-[#C4E4C5] font-bold text-lg mb-2 uppercase tracking-wide transition-colors duration-300">
+        <label
+          htmlFor="username"
+          className="block text-black dark:text-[#C4E4C5] font-bold text-lg mb-2 uppercase tracking-wide transition-colors duration-300"
+        >
+          User Name
+        </label>
+        <input
+          className="w-full bg-white dark:bg-black border-4 border-black dark:border-[#C4E4C5] p-4 text-black dark:text-[#C4E4C5] font-mono text-lg focus:outline-none focus:bg-yellow-100 dark:focus:bg-zinc-800 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_#C4E4C5] transition-all focus:translate-x-[2px] focus:translate-y-[2px] focus:shadow-none placeholder-gray-500 dark:placeholder-zinc-600"
+          id="username"
+          type="text"
+          value={userName}
+          placeholder="Enter your name..."
+          onChange={(e) => {
+            setUserName(e.target.value);
+          }}
+        />
+      </div>
+
+      <div className="mb-6">
+        <label
+          htmlFor="quote"
+          className="block text-black dark:text-[#C4E4C5] font-bold text-lg mb-2 uppercase tracking-wide transition-colors duration-300"
+        >
           Target Text
         </label>
         <input
@@ -50,7 +76,10 @@ const Form: React.FC<IFromProps> = ({
       </div>
 
       <div className="mb-8">
-        <label className="block text-black dark:text-[#C4E4C5] font-bold text-lg mb-2 uppercase tracking-wide transition-colors duration-300">
+        <label
+          htmlFor="minmax-range"
+          className="block text-black dark:text-[#C4E4C5] font-bold text-lg mb-2 uppercase tracking-wide transition-colors duration-300"
+        >
           Monkey Population: {monkeys}
         </label>
         <input
