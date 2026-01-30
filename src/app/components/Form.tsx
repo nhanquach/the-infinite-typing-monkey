@@ -9,6 +9,7 @@ interface IFromProps {
   setUserName: (name: string) => void;
   setPopulation: (e: React.FormEvent<HTMLInputElement>) => void;
   handleExecute: () => void;
+  onViewLeaderboard: () => void;
 }
 
 const Form: React.FC<IFromProps> = ({
@@ -20,6 +21,7 @@ const Form: React.FC<IFromProps> = ({
   handleExecute,
   userName,
   setUserName,
+  onViewLeaderboard,
 }) => {
   return (
     <form
@@ -94,14 +96,23 @@ const Form: React.FC<IFromProps> = ({
         />
       </div>
 
-      <button
-        className="w-full bg-white dark:bg-black text-black dark:text-[#C4E4C5] font-bold text-xl py-4 px-6 border-4 border-black dark:border-[#C4E4C5] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_#C4E4C5] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[4px_4px_0px_0px_#C4E4C5] active:translate-x-[6px] active:translate-y-[6px] active:shadow-none transition-all disabled:bg-gray-300 dark:disabled:bg-zinc-800 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
-        type="submit"
-        disabled={isExecuting}
-        onClick={handleExecute}
-      >
-        {isExecuting ? "SIMULATING..." : "START SIMULATION"}
-      </button>
+      <div className="flex flex-col gap-4">
+        <button
+          className="w-full bg-white dark:bg-black text-black dark:text-[#C4E4C5] font-bold text-xl py-4 px-6 border-4 border-black dark:border-[#C4E4C5] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_#C4E4C5] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[4px_4px_0px_0px_#C4E4C5] active:translate-x-[6px] active:translate-y-[6px] active:shadow-none transition-all disabled:bg-gray-300 dark:disabled:bg-zinc-800 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
+          type="submit"
+          disabled={isExecuting}
+          onClick={handleExecute}
+        >
+          {isExecuting ? "SIMULATING..." : "START SIMULATION"}
+        </button>
+        <button
+          className="w-full bg-[#C4E4C5] dark:bg-zinc-800 text-black dark:text-[#C4E4C5] font-bold text-xl py-4 px-6 border-4 border-black dark:border-[#C4E4C5] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_#C4E4C5] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[4px_4px_0px_0px_#C4E4C5] active:translate-x-[6px] active:translate-y-[6px] active:shadow-none transition-all"
+          type="button"
+          onClick={onViewLeaderboard}
+        >
+          VIEW LEADERBOARD 🏆
+        </button>
+      </div>
     </form>
   );
 };

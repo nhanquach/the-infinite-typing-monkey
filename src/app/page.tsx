@@ -5,6 +5,7 @@ import StringBackground from "./components/StringBackground";
 import Form from "./components/Form";
 import Result from "./components/Result";
 import Leaderboard from "./components/Leaderboard";
+import Modal from "./components/Modal";
 import { LeaderboardEntry } from "../types";
 
 export default function Home() {
@@ -23,6 +24,7 @@ export default function Home() {
   const [userName, setUserName] = useState("");
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isLeaderboardOpen, setIsLeaderboardOpen] = useState(false);
 
   useEffect(() => {
     const storedLeaderboard = localStorage.getItem("monkeyLeaderboard");
@@ -83,6 +85,7 @@ export default function Home() {
           setQuote={setQuote}
           userName={userName}
           setUserName={setUserName}
+          onViewLeaderboard={() => setIsLeaderboardOpen(true)}
         />
       </section>
 
@@ -100,9 +103,16 @@ export default function Home() {
             time={time}
             totalStringCount={totalStringCount}
           />
-          <Leaderboard entries={leaderboard} />
         </div>
       </section>
+
+      <Modal
+        isOpen={isLeaderboardOpen}
+        onClose={() => setIsLeaderboardOpen(false)}
+        title="LEADERBOARD 🏆"
+      >
+        <Leaderboard entries={leaderboard} />
+      </Modal>
     </main>
   );
 }

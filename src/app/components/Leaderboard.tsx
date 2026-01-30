@@ -10,11 +10,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ entries }) => {
   const sortedEntries = [...entries].sort((a, b) => a.timeTaken - b.timeTaken);
 
   return (
-    <div className="w-full mt-12 z-20 relative font-mono">
-      <h2 className="text-3xl font-bold tracking-tighter text-black dark:text-[#C4E4C5] mb-6 border-b-4 border-black dark:border-[#C4E4C5] pb-2 inline-block transition-colors duration-300">
-        LEADERBOARD 🏆
-      </h2>
-
+    <div className="w-full relative font-mono">
       {sortedEntries.length === 0 ? (
         <div className="bg-white dark:bg-black border-4 border-black dark:border-[#C4E4C5] p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_#C4E4C5] transition-colors duration-300">
           <p className="text-lg text-black dark:text-[#C4E4C5]">
